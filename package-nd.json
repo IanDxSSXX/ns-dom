@@ -1,0 +1,19 @@
+{
+  "name": "ns-dom",
+  "version": "0.0.0-alpha.0",
+  "type": "module",
+  "main": "./index.cjs",
+  "module": "./index.js",
+  "typings": "./index.d.ts",
+  "author": {
+    "name": "IanDx",
+    "email": "iandxssxx@gmail.com"
+  },
+  "keywords": [
+    "nativescript"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@nativescript/core": "~8.6.0"
+  }
+}

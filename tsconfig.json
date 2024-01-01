@@ -11,11 +11,11 @@
     "lib": ["ESNext", "dom"],
     "baseUrl": ".",
     "paths": {
-      "~/*": ["app/*"],
-      "@/*": ["app/*"]
+      "~/*": ["dev/*"],
+      "@/*": ["dev/*"]
     }
   },
-  "include": ["app/**/*"],
+  "include": ["dev/**/*", "src/**/*"],
   "files": ["./references.d.ts"],
   "exclude": ["node_modules", "platforms"]
 }
