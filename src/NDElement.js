@@ -44,9 +44,10 @@ export function NDElementFactory(NSComponent) {
     }
 
     #classList = new NDClassList(this._setClassName.bind(this))
-    #className = ""
+    #className = super.className
     _setClassName() {
       this.#className = Array.from(this.#classList).join(" ")
+      super.className = this.#className
     }
 
     get classList() {
@@ -60,6 +61,7 @@ export function NDElementFactory(NSComponent) {
     set className(className) {
       this.#classList = new NDClassList(this._setClassName.bind(this))
       className.split(" ").forEach(clsName => this.#classList.add(clsName))
+      super.className = this.#className
     }
 
     get firstElementChild() {
@@ -293,7 +295,6 @@ export function NDElementFactory(NSComponent) {
     // ---- Event Target ----
     addEventListener(type, listener) {
       super.addEventListener(type, listener)
-      console.log(type, listener.toString())
       this.#events.set(listener, type)
     }
 

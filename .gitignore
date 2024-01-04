@@ -28,6 +28,7 @@ dist-ssr
 
 **/dist/**
 _cacache
+App_Resources
 
 build
 platforms

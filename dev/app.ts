@@ -1,4 +1,4 @@
-import { Application } from "@nativescript/core"
+import { Application, Label } from "@nativescript/core"
 import { document } from "../src"
 
 function create() {
@@ -8,6 +8,9 @@ function create() {
   button.text
   button.textContent = "Click!"
   const label = document.createElement("Label")
+  label.classList.add("text-red-600")
+  label.classList.add("text-center")
+  console.log(label.className)
   label.textContent = "hi"
 
   layout.appendChild(button)
@@ -23,8 +26,8 @@ function create() {
   const btn3 = button2.cloneNode(true)
   layout.insertBefore(btn3, button)
 
-  btn3.classList.add("bg-slate-100")
-  btn3.classList.toggle("bg-slate-efe")
+  btn3.classList.add("text-red-100")
+  btn3.classList.add("h1")
 
   return layout
 }
