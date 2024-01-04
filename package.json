@@ -14,18 +14,23 @@
     "@nativescript/preview-cli": "1.0.12",
     "@nativescript/types": "~8.6.0",
     "@nativescript/webpack": "~5.0.18",
-    "typescript": "~5.2.0",
-    "tsup": "^6.5.0",
     "@typescript-eslint/eslint-plugin": "^6.15.0",
     "@typescript-eslint/parser": "^6.15.0",
     "eslint": "^8.55.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.1.1",
-    "prettier": "^3.1.1"
+    "prettier": "^3.1.1",
+    "tsup": "^6.5.0",
+    "typescript": "~5.2.0"
   },
   "tsup": {
-    "entry": ["src/index.ts"],
-    "format": ["cjs", "esm"],
+    "entry": [
+      "src/index.ts"
+    ],
+    "format": [
+      "cjs",
+      "esm"
+    ],
     "clean": true,
     "dts": true,
     "minify": true

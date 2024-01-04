@@ -27,6 +27,7 @@ dist-ssr
 .history/*
 
 **/dist/**
+_cacache
 
 build
 platforms

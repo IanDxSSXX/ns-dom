@@ -1,18 +1,14 @@
-/*
-In NativeScript, the app.ts file is the entry point to your application.
-You can use this file to perform app-level initialization, but the primary
-purpose of the file is to pass control to the app’s first module.
-*/
-
 import { Application } from "@nativescript/core"
 import { document } from "../src"
 
 function create() {
   const layout = document.createElement("StackLayout")
   const button = document.createElement("Button")
+
+  button.text
   button.textContent = "Click!"
   const label = document.createElement("Label")
-  label.textContent = "shit"
+  label.textContent = "hi"
 
   layout.appendChild(button)
   layout.appendChild(label)
@@ -23,14 +19,13 @@ function create() {
 
   const btn3 = button2.cloneNode(true)
   layout.insertBefore(btn3, button)
+  btn3.addEventListener("tap", () => {
+    label.textContent += "jjj"
+  })
+  btn3.classList.add("bg-slate-100")
+  btn3.classList.toggle("bg-slate-efe")
 
   return layout
 }
 
-// Application.run({ moduleName: 'app-root' })
-Application.run({ create: () => create().nsComponent })
-
-/*
-Do not place any code after the application has been started as it will not
-be executed on iOS.
-*/
+Application.run({ create })

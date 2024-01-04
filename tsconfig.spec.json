@@ -1,0 +1,9 @@
+{
+	"extends": "./tsconfig.json",
+    "compilerOptions": {
+        "sourceMap": true
+    },
+	"files": ["dev/test.ts"],
+	"include": ["dev/**/*.spec.ts", "dev/**/*.d.ts"],
+	"exclude": ["node_modules", "platforms", "e2e"]
+}

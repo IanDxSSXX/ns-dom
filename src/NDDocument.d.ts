@@ -1,14 +1,19 @@
-import { NDNode } from "./nodes/NDNode"
-import { NDLayoutNode } from "./nodes/NDLayoutNode"
 import { NodeMap } from "./nodeMap"
-import { type LayoutBase } from "@nativescript/core"
+import { NDElement } from "./NDElement"
 
-type NodeReturnType<T extends keyof typeof NodeMap> = InstanceType<
-  (typeof NodeMap)[T]
-> extends LayoutBase
-  ? NDLayoutNode<InstanceType<(typeof NodeMap)[T]>>
-  : NDNode<InstanceType<(typeof NodeMap)[T]>>
+type NodeMapType = typeof NodeMap
 
-export class NDDocument {
-  createElement<T extends keyof typeof NodeMap>(tagName: T): NodeReturnType<T>
+export interface NDEvent<T> {
+  eventName: string
+  data: T
 }
+
+export type NDDocument = NDElement<() => object> & {
+  // ---- Properties ----
+  createElement<T extends keyof NodeMapType>(
+    tagName: T
+  ): NDElement<InstanceType<NodeMapType[T]>>
+
+  createEvent<T>(eventName: string, data: T): NDEvent<T>
+}
+export declare const NDDocument: new () => NDDocument
