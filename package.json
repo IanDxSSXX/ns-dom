@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "tsup --sourcemap && cp package-nd.json dist/package.json"
+    "build": "tsup --sourcemap && cp package-nd.json dist/package.json && cp README.md dist/README.md"
   },
   "dependencies": {
     "@nativescript/core": "~8.6.0"
