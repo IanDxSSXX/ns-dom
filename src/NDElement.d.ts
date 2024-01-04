@@ -1,5 +1,6 @@
 import { AnimationPromise } from "@nativescript/core/ui/animation"
 import { NDNode } from "./NDNode"
+import { NDEvent } from "./NDDocument"
 
 class NDClassList extends Set {
   #setClassName: (className: string) => void
@@ -18,7 +19,9 @@ export type NDElement<T> = NDNode<T> & {
   // ---- Properties ----
   // ---- Ignore web aria properties
   // readonly assignedSlot: NDNode<any> | null
-  attributes: { [key: string]: string }
+  #attributes: { [key: string]: string }
+  #events: Map<(event: NDEvent<any>) => void, string>
+
   readonly childElementCount: number
   readonly children: NDElement<T>[]
   readonly classList: NDClassList
@@ -64,6 +67,7 @@ export type NDElement<T> = NDNode<T> & {
   // ---- Not applicable in NativeScript
   // attachShadow(init: ShadowRootInit): ShadowRoot;
   before(...nodes: Array<string | NDElement<T>>): void
+  cloneNode(deep?: boolean): NDElement<T>
   // ---- Might not be necessary
   // closest(selectors: string): NDElement<T> | null;
   // ---- More relevant to CSS in web context
@@ -131,4 +135,12 @@ export type NDElement<T> = NDNode<T> & {
   // ---- Namespace handling might not be necessary
   // setAttributeNodeNS(attr: Attr): Attr | null;
   // setAttributeNS(namespace: string | null, qualifiedName: string, value: string): void
+
+  // ---- Events ----
+  addEventListener(
+    eventName: string,
+    callback: (event: NDEvent<any>) => void
+  ): void
+  dispatchEvent(event: NDEvent): void
+  removeEventListener(callback: (event: NDEvent<any>) => void): void
 }

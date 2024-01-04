@@ -16,12 +16,13 @@ function create() {
   const button2 = document.createElement("Button")
   button2.textContent = "CfaeCC2"
   layout.insertBefore(button2, label)
+  button2.addEventListener("tap", () => {
+    label.textContent += "jjj"
+  })
 
   const btn3 = button2.cloneNode(true)
   layout.insertBefore(btn3, button)
-  btn3.addEventListener("tap", () => {
-    label.textContent += "jjj"
-  })
+
   btn3.classList.add("bg-slate-100")
   btn3.classList.toggle("bg-slate-efe")
 

@@ -1,5 +1,3 @@
-import { document } from "."
-
 export function NDNodeFactory(NSComponent) {
   class NDNode extends NSComponent {
     tagName
@@ -79,17 +77,6 @@ export function NDNodeFactory(NSComponent) {
       child._setParentNode(this)
       this.#children.push(child)
       super.addChild(child)
-    }
-
-    cloneNode(deep) {
-      const newNode = document.createElement(this.tagName)
-      newNode.textContent = this.textContent
-      if (deep && this.childNodes) {
-        this.childNodes.forEach(child => {
-          newNode.appendChild(child.cloneNode(true))
-        })
-      }
-      return newNode
     }
 
     compareDocumentPosition(otherNode) {
@@ -189,13 +176,6 @@ export function NDNodeFactory(NSComponent) {
     removeAllChildren() {
       this.#children = []
       super.removeChildren()
-    }
-
-    // ---- Event Target ----
-    dispatchEvent(event) {
-      event.object = this
-      super.notify(event)
-      return true
     }
 
     // ---- Static Methods ----

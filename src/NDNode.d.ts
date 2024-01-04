@@ -1,5 +1,4 @@
 import { ViewBase } from "@nativescript/core"
-import { NDEvent } from "./NDDocument"
 import { NDElement } from "./NDElement"
 
 export function NDNodeFactory<T extends ViewBase>(
@@ -31,7 +30,8 @@ export type NDNode<T> = T & {
 
   // ---- Methods ----
   appendChild(child: NDElement<ViewBase>): void
-  cloneNode(deep: boolean): NDElement<ViewBase>
+  // ---- Implemented in NDElement
+  // cloneNode(deep: boolean): NDElement<ViewBase>
   compareDocumentPosition(other: NDElement<ViewBase>): number
   contains(node: NDElement<ViewBase>): boolean
   getRootNode(): NDElement<ViewBase>
@@ -52,7 +52,4 @@ export type NDNode<T> = T & {
   ): void
   removeChild(child: NDElement<ViewBase>): void
   removeAllChildren(): void
-
-  // ---- Events ----
-  dispatchEvent(event: NDEvent): void
 }

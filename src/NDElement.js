@@ -1,5 +1,6 @@
 import { NDNodeFactory } from "./NDNode"
 import { parseXML } from "./xmlParser"
+import { document } from "."
 
 class NDClassList extends Set {
   #setClassName
@@ -34,6 +35,8 @@ class NDClassList extends Set {
 export function NDElementFactory(NSComponent) {
   class NDElement extends NDNodeFactory(NSComponent) {
     #attributes = {}
+    #events = new Map()
+
     // ---- Properties ----
     // ---- [MDN Reference](https://developer.mozilla.org/en-US/docs/Web/API/Element)
     get attributes() {
@@ -62,8 +65,6 @@ export function NDElementFactory(NSComponent) {
     get firstElementChild() {
       return this.firstChild
     }
-
-    id
 
     get innerHTML() {
       const childHtml = this.childNodes.map(child => child.outerHTML).join("")
@@ -139,6 +140,23 @@ export function NDElementFactory(NSComponent) {
 
     append(...nodes) {
       nodes.forEach(node => this.appendChild(node))
+    }
+
+    cloneNode(deep) {
+      const newNode = document.createElement(this.tagName)
+      newNode.textContent = this.textContent
+      Object.entries(this.#attributes).forEach(([key, value]) => {
+        newNode.setAttribute(key, value)
+      })
+      this.#events.forEach((type, eventFunc) => {
+        newNode.addEventListener(type, eventFunc)
+      })
+      if (deep && this.childNodes) {
+        this.childNodes.forEach(child => {
+          newNode.appendChild(child.cloneNode(true))
+        })
+      }
+      return newNode
     }
 
     before(...nodes) {
@@ -269,6 +287,25 @@ export function NDElementFactory(NSComponent) {
 
     setAttribute(qualifiedName, value) {
       this.#attributes[qualifiedName] = value
+    }
+
+    // ---- Events ----
+    // ---- Event Target ----
+    addEventListener(type, listener) {
+      super.addEventListener(type, listener)
+      console.log(type, listener.toString())
+      this.#events.set(listener, type)
+    }
+
+    dispatchEvent(event) {
+      event.object = this
+      super.notify(event)
+      return true
+    }
+
+    removeEventListener(type, listener) {
+      super.removeEventListener(type, listener)
+      this.#events.delete(listener)
     }
   }
 
